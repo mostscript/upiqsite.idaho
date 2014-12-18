@@ -1,0 +1,19 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:cmf="http://namespaces.zope.org/cmf"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  i18n_domain="upiqsite.idaho">
+    
+    <!-- register extension profiles for add-on --> 
+    <genericsetup:registerProfile
+        name="default"
+        title="upiqsite.idaho: site policy product for projects.ihawcc.org"
+        directory="profiles/default"
+        description="Components such as views for QI extranet use."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />  
+
+    <!-- register FS directory view for skins layer -->
+    <cmf:registerDirectory name="upiqsite_idaho" /> 
+
+</configure>

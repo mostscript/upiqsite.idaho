@@ -1,0 +1,23 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:cmf="http://namespaces.zope.org/cmf"
+  xmlns:grok="http://namespaces.zope.org/grok"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:five="http://namespaces.zope.org/five">
+ 
+  <!-- Include configuration for dependencies listed in setup.py -->
+  <includeDependencies package="." />
+
+  <five:registerPackage package="." initialize=".zope2.initialize" />
+
+  <!-- include Generic Setup extension profiles -->
+  <include file="profiles.zcml" />
+
+  <!-- site style sheet -->
+  <browser:resource
+    name="ihawcc_projects_site.css"
+    file="ihawcc_projects_site.css"
+    layer=".interfaces.IIHAWCCProjectsSiteProductLayer"
+    />
+
+</configure>

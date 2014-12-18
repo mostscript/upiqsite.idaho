@@ -1,0 +1,35 @@
+id: front-page
+title: IHAWCC TeamSpace Collaboration Site
+description: Welcome to the TeamSpace collaboration site for the Idaho Health and Wellness Collaborative for Children (IHAWCC)
+Content-Type: text/html
+
+<h3><em>Project Members:</em></h3>
+<p class="callout">
+  <b>
+    Please click the log-in link on the upper right to log in to your
+    project(s).
+  </b>
+</p>
+
+<h3><em>QI TeamSpace:</em></h3>
+<p class="callout">
+  <b>
+    The Idaho Health and Wellness Collaborative for Children (<a href="http://www.ihawcc.org" target="_blank">IHAWCC</a>)
+    and it's stakeholders use this site to facilitate online collaboration,
+    resource sharing, and data collection related to the various quality
+    improvement projects.
+  </b>
+  <img src="./logo.png" style="float:right;" />
+</p>
+
+<h3><em>Questions?</em></h3>
+<p class="callout">
+  <b>
+    If you have questions about QI Teamspace, please contact project staff by
+    e-mail at <a href="mailto:webmaster@ihawcc.org">webmaster@ihawcc.org</a>.
+    <br /><br />
+    For more information about IHAWCC, please visit <a href="http://www.ihawcc.org" target="_blank">IHAWCC</a> or email us at
+<a href="mailto:CHICProject@dhw.idaho.gov">CHICProject@dhw.idaho.gov</a>.
+  </b>
+</p>
+
