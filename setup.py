@@ -19,7 +19,7 @@ setup(
     url='https://github.com/upiq',
     license='GPL',
     packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['uu'],
+    namespace_packages=['upiqsite'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
