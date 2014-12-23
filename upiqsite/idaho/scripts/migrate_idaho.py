@@ -6,19 +6,19 @@ Site-wide stuff:
   * ~~ Site policy: upiqsite.idaho -> uu.projectsite
   * ~~ Re-index portal_catalog?
   * ~~ Copy project rosters.
-  * Set site_url property in portal_properties/site_properties
-  * Project schemas: form definitions and field group schemas to schema saver
-  * Prime site data point cache (warm)
-    * We need updated URLs anyway
-  * Re-index uid_catalog?
+  * ~~ verify site_url property in portal_properties/site_properties
+  * ~~ Project schemas: form definition, field group schemas to schema saver
+  * ~~ Prime site data point cache (warm)
 
 """
 
+import itertools
 import time
 
 from Products.CMFPlone.factory import addPloneSite
 from Products.PlonePAS.Extensions.Install import activatePluginInterfaces
 import transaction
+from zope.component import queryUtility
 from zope.component.hooks import setSite
 
 from collective.teamwork.user.groups import Groups
@@ -26,6 +26,18 @@ from collective.teamwork.user.interfaces import IWorkspaceRoster
 from collective.teamwork.user.members import SiteMembers
 from collective.teamwork.utils import group_workspace, get_workspaces
 
+from uu.formlibrary.handlers import definition_schema_handler
+from uu.formlibrary.measure.cache import DataPointCache
+from uu.dynamicschema.interfaces import ISchemaSaver, DEFAULT_SIGNATURE
+from uu.formlibrary.interfaces import DEFINITION_TYPE, FIELD_GROUP_TYPE
+
+
+DEFN_QUERY = {
+    'portal_type': {
+        'query': (DEFINITION_TYPE, FIELD_GROUP_TYPE),
+        'operator': 'or',
+        }
+    }
 
 TARGET = 'idaho'
 
@@ -137,6 +149,31 @@ def trim_users_groups(site):
     trim_users(site)
 
 
+def load_schemas(site):
+    saver = queryUtility(ISchemaSaver)
+    _get = lambda brain: brain._unrestrictedGetObject()
+    r = site.portal_catalog.unrestrictedSearchResults(DEFN_QUERY)
+    _added = 0
+    for content in itertools.imap(_get, r):
+        if not content.entry_schema.strip():
+            continue
+        signature = saver.signature(content.entry_schema)
+        if signature == DEFAULT_SIGNATURE:
+            continue
+        if signature not in saver:
+            definition_schema_handler(content, None)
+            signature = content.signature  # sign. may have changed...
+            _added += 1
+        assert signature in saver
+        print 'Schema provider %s, signature %s' % (content, signature)
+    print '\tAdded %s schemas for %s schema providers' % (_added, len(r))
+
+
+def warm_datapoints(site):
+    cache = DataPointCache(site)
+    cache.warm()
+
+
 def main(app):
     start = time.time()
     source = app.qiteamspace
@@ -147,7 +184,10 @@ def main(app):
         target = app[TARGET]
     print '\t--Since start: %s' % (time.time() - start)
     setSite(target)
-    # pass 1: get content
+    # verify site_url is set as property:
+    _prop = target.portal_properties.site_properties.getProperty
+    assert _prop('site_url') == 'https://projects.ihawcc.org'
+    # -- get content
     print 'Copying projects from source %s to target %s' % (
         source,
         target,
@@ -156,20 +196,31 @@ def main(app):
         source_project = source[name]
         copyproject(source_project, targetsite=target)
     print '\t--Since start: %s' % (time.time() - start)
-    # pass 2: index content
+    # -- index content
     print 'Reindexing content...'
     reindex_site(target)
     print '\t--Since start: %s' % (time.time() - start)
-    # pass 3: copy all PAS users, groups
+    # -- copy all PAS users, groups
     print 'Copying PAS users and groups...'
     copy_pas_users_groups(source, target)
     print '\t--Since start: %s' % (time.time() - start)
-    # pass 4: trim users and groups not belonging to workspaces:
+    # -- trim users and groups not belonging to workspaces:
     print 'Trimming users and groups...'
     trim_users_groups(target)
     print '\t--Since start: %s' % (time.time() - start)
+    # -- Populate schemas into local schema saver utility from all providers
+    #    (form definitions and contained field groups)
+    print 'Populating schema saver...'
+    load_schemas(target)
+    print '\t--Since start: %s' % (time.time() - start)
+    # -- Warm data point cache:
+    print 'Warming data point cache...'
+    warm_datapoints(target)
+    print '\t--Since start: %s' % (time.time() - start)
+    # -- commmit transaction:
     print 'Committing transaction...'
     #commit(target, 'Copied Idaho site content/data.')
+    print '\t--Since start: %s' % (time.time() - start)
 
 
 if __name__ == '__main__' and 'app' in locals():
