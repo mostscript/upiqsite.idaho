@@ -51,7 +51,6 @@ PROJECTS = (
     'idaho-depression-screening-lc',
     'idaho-obesity-lc',
     'idaho-transitions',
-    'demo-project-gina',
     'idaho-adhd-lc',
     )
 
