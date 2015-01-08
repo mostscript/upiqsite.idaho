@@ -94,7 +94,7 @@ def copy_pas_plugin(source_uf, target_uf, name):
 def copy_pas_users_groups(source, target):
     source_uf = source.acl_users
     target_uf = target.acl_users
-    names = ['source_users', 'source_groups']
+    names = ['source_users', 'source_groups', 'mutable_properties']
     for name in names:
         target_uf._delObject(name, suppress_events=True)
         copy_pas_plugin(source_uf, target_uf, name)
