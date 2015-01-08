@@ -218,7 +218,7 @@ def main(app):
     print '\t--Since start: %s' % (time.time() - start)
     # -- commmit transaction:
     print 'Committing transaction...'
-    #commit(target, 'Copied Idaho site content/data.')
+    commit(target, 'Copied Idaho site content/data.')
     print '\t--Since start: %s' % (time.time() - start)
 
 
