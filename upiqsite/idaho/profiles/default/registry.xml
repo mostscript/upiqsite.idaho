@@ -1,5 +1,5 @@
 <registry>
-    <record name="plone.app.event.available_timezones" interface="plone.app.event.interfaces.IEventSettings" field="available_timezones">
+  <record name="plone.app.event.available_timezones" interface="plone.app.event.interfaces.IEventSettings" field="available_timezones">
     <field type="plone.registry.field.List">
       <default/>
       <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="help_available_timezones">The timezones, which should be available for the portal. Can be set for users and events</description>
@@ -21,7 +21,6 @@
       <element>US/Michigan</element>
       <element>US/Mountain</element>
       <element>US/Pacific</element>
-      <element>US/Pacific-New</element>
       <element>US/Samoa</element>
       <element>UTC</element>
     </value>
