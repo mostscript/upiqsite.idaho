@@ -140,6 +140,10 @@ def trim_users(site):
         if username not in known:
             del(members[username])
             removed.append(username)
+        site.acl_users.portal_role_manager.assignRolesToPrincipal(
+            ['Member'],
+            members.get(username)._id,
+            )
     print 'Removed %s users ununsed of %s' % (len(removed), len(orig))
 
 
