@@ -41,4 +41,17 @@
     </field>
     <value>US/Mountain</value>
   </record>
+  <record name="plone.cachepurging.interfaces.ICachePurgingSettings.domains" interface="plone.cachepurging.interfaces.ICachePurgingSettings" field="domains">
+    <field type="plone.registry.field.Tuple">
+      <default/>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.cachepurging" ns0:translate="">This option is only relevant if you are using virtual hosting and you have enabled the option to send PURGE requests with virtual hosting URLs above. If you your site is served on multiple domains e.g. http://example.org and http://www.example.org you may wish to purge both. If so, list all your domains here</description>
+      <missing_value/>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.cachepurging" ns0:translate="">Domains</title>
+      <value_type type="plone.registry.field.URI"/>
+    </field>
+    <value>
+      <element>https://projects.ihawcc.org:443</element>
+    </value>
+  </record>
 </registry>
