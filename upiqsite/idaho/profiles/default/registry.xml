@@ -1,0 +1,45 @@
+<registry>
+    <record name="plone.app.event.available_timezones" interface="plone.app.event.interfaces.IEventSettings" field="available_timezones">
+    <field type="plone.registry.field.List">
+      <default/>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="help_available_timezones">The timezones, which should be available for the portal. Can be set for users and events</description>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="">Available timezones</title>
+      <value_type type="plone.registry.field.Choice">
+        <vocabulary>plone.app.event.Timezones</vocabulary>
+      </value_type>
+    </field>
+    <value>
+      <element>US/Alaska</element>
+      <element>US/Aleutian</element>
+      <element>US/Arizona</element>
+      <element>US/Central</element>
+      <element>US/East-Indiana</element>
+      <element>US/Eastern</element>
+      <element>US/Hawaii</element>
+      <element>US/Indiana-Starke</element>
+      <element>US/Michigan</element>
+      <element>US/Mountain</element>
+      <element>US/Pacific</element>
+      <element>US/Pacific-New</element>
+      <element>US/Samoa</element>
+      <element>UTC</element>
+    </value>
+  </record>
+  <record name="plone.app.event.first_weekday" interface="plone.app.event.interfaces.IEventSettings" field="first_weekday">
+    <field type="plone.registry.field.Choice">
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="help_first_weekday">First day in the Week.</description>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="label_first_weekday">First Weekday</title>
+      <vocabulary>plone.app.event.Weekdays</vocabulary>
+    </field>
+    <value>6</value>
+  </record>
+  <record name="plone.app.event.portal_timezone" interface="plone.app.event.interfaces.IEventSettings" field="portal_timezone">
+    <field type="plone.registry.field.Choice">
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="help_portal_timezone">The timezone setting of the portal. Users can set their own timezone, if available timezones are defined.</description>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="plone.app.event" ns0:translate="">Portal default timezone</title>
+      <vocabulary>plone.app.event.Timezones</vocabulary>
+    </field>
+    <value>US/Mountain</value>
+  </record>
+</registry>
