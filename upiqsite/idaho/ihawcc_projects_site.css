@@ -1,2 +1,6 @@
 /* IHAWCC-specific styles */
 
+#portal-logo {
+  margin-top: -0.6em !important;
+  margin-bottom: 0.1em !important;
+}
