@@ -13,4 +13,7 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />  
 
+    <!-- register FS directory view for skins layer -->
+    <cmf:registerDirectory name="upiqsite_idaho" />
+
 </configure>
